@@ -24,7 +24,7 @@ iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTN
 |`IDDNS_PASSWORD`|`-p`|The Dynamic DNS password, as configured in your Infomaniak Manager. |
 |`IDDNS_IP`|`-i`|The IP address to update the Dynamic DNS record with. This may be either an IPv4 or an IPv6. **Leave empty if you want this IP address to be grabbed automatically.** |
 |`IDDNS_GRABBER`|`-g`|The URL of a custom API endpoint that returns you public IP address. This endpoint must return a text-only response containing only your IP address. **Leave empty to use the default endpoint :** `https://api.ipify.org/`|
-|`HOSTNAME`| n/a |The hostname for which the record must be updated. **This must be a valid FQDN**|
+|`HOSTNAME`| n/a |The hostname for which the record must be updated. **This must be a valid FQDN and the dynamic record must already exist in your Infomaniak Manager.**|
 
 
 ### Using a configuration file

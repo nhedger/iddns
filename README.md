@@ -4,14 +4,18 @@
 
 ## Install
 
-Make sure `curl` is available and installed on your system.
+Make sure `curl` is available and installed on your system. `make` is also required if you want to use the Makefile for installing
+the script automatically.
 
 Either clone or [download](https://github.com/nhedger/iddns/archive/master.zip) this repository.
 
 ```shell script
 $ git clone https://github.com/nhedger/iddns
-cd iddns && chmod +x iddns.sh
+cd iddns
+make install
 ```
+
+Run `make uninstall` from the same directory if you want to completely remove `iddns` from your system.
 
 ## Usage
 ```shell script

@@ -38,7 +38,7 @@ $ iddns -c /path/to/config/file example.tld
 
 All the options above except the `HOSTNAME` can be set from the configuration file.
 
-**WARNING** : These options will be overridden by their equivalents if they are provided as arguments to the script.
+**WARNING** : These options will be overridden by their equivalents if they are provided as arguments on the command line.
 
 You'll find a [example configuration file](config.example) in this repository.
 

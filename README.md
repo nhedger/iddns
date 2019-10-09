@@ -6,7 +6,7 @@
 
 Make sure `curl` is available and installed on your system.
 
-Either clone or download this repository.
+Either clone or [download](https://github.com/nhedger/iddns/archive/master.zip) this repository.
 
 ```shell script
 $ git clone https://github.com/nhedger/iddns

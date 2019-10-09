@@ -63,7 +63,7 @@ IDDNS_PASSWORD="password"
 Create a `/etc/cron.d/iddns` file with the following contents (replace with the path to your config file and hostname) : 
 
 ```shell script
-0 * * * * root /usr/local/bin/iddns -c /path/to/config example.tld >> /var/log/iddns.log 2>&1
+0 * * * * root /usr/local/bin/iddns -t -c /path/to/config example.tld >> /var/log/iddns.log 2>&1
 ```
 
 This will run `iddns` every hour and log its output to `/var/log/iddns.log`. 

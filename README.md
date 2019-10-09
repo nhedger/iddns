@@ -13,8 +13,8 @@ cd iddns && chmod +x iddns.sh
 
 ## Usage
 ```shell script
-Usage: iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] HOSTNAME
-Usage: iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME
+iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] HOSTNAME
+iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME
 ```
 
 | Option | Short| Description|

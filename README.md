@@ -30,8 +30,9 @@ iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTN
 |`IDDNS_PASSWORD`|`-p`|The Dynamic DNS password, as configured in your Infomaniak Manager. |
 |`IDDNS_IP`|`-i`|The IP address to update the Dynamic DNS record with. This may be either an IPv4 or an IPv6. **Leave empty if you want this IP address to be grabbed automatically.** |
 |`IDDNS_GRABBER`|`-g`|The URL of a custom API endpoint that returns you public IP address. This endpoint must return a text-only response containing only your IP address. **Leave empty to use the default endpoint :** `https://api.ipify.org/`|
+|`IDDNS_TIMESTAMPS`|`-t`|All output is prefixed with the current timestamp. This is particularly useful when outputting to a log file.
+|`IDDNS_SILENT`|`-s`|No output will be generated if this flag is active.|
 |`HOSTNAME`| n/a |The hostname for which the record must be updated. **This must be a valid FQDN and the dynamic record must already exist in your Infomaniak Manager.**|
-
 
 ### Using a configuration file
 
@@ -47,6 +48,26 @@ All the options above except the `HOSTNAME` can be set from the configuration fi
 **WARNING** : These options will be overridden by their equivalents if they are provided as arguments on the command line.
 
 You'll find a [example configuration file](config.example) in this repository.
+
+## Scheduling updates
+
+You may automate your updates by setting up a cron job for `iddns`.
+
+Create a configuration file that holds your credentials:
+
+```shell script
+IDDNS_USERNAME="example"
+IDDNS_PASSWORD="password"
+```
+
+Create a `/etc/cron.d/iddns` file with the following contents (replace with the path to your config file and hostname) : 
+
+```shell script
+0 * * * * root /usr/local/bin/iddns -c /path/to/config example.tld >> /var/log/iddns.log 2>&1
+```
+
+This will run `iddns` every hour and log its output to `/var/log/iddns.log`. 
+
 
 ## Credits
 

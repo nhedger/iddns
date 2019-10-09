@@ -8,6 +8,14 @@
 # License: MIT
 #
 
+# Set default values
+IDDNS_USERNAME=""
+IDDNS_PASSWORD=""
+IDDNS_GRABBER="https://api.ipify.org/"
+IDDNS_IP=""
+IDDNS_TIMESTAMPS=false
+IDDNS_SILENT=false
+
 function usage()
 {
     echo ""
@@ -19,8 +27,8 @@ function usage()
 		echo ""
 	  fi
 
-    echo "Usage: iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] HOSTNAME"
-    echo "Usage: iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME"
+    echo "Usage: iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME"
+    echo "Usage: iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME"
     echo ""
     echo "Notes:"
     echo ""
@@ -31,11 +39,17 @@ function usage()
 # Helper function for logging messages with the date and time
 function log()
 {
-    echo "$(date -u) : $1"
+    if [[ ${IDDNS_SILENT} = false ]]; then
+        if [[ ${IDDNS_TIMESTAMPS} = true ]]; then
+            echo "$(date -u) : $1"
+        else
+            echo $1
+        fi
+    fi
 }
 
 # Grab arguments from command line
-while getopts ":c:u:p:i:g:" opt
+while getopts ":c:u:p:i:g:ts" opt
 do
     case ${opt} in
         c)
@@ -57,6 +71,12 @@ do
         g)
             opt_grabber=${OPTARG}
             ;;
+        t)
+            opt_timestamps=true
+            ;;
+        s)
+            opt_silent=true
+            ;;
         \?)
             usage "Invalid argument"
             ;;
@@ -66,12 +86,6 @@ shift $((OPTIND - 1))
 
 # Grab the hostname from the arguments list
 IDDNS_HOSTNAME=$1
-
-# Set default values
-IDDNS_USERNAME=""
-IDDNS_PASSWORD=""
-IDDNS_GRABBER="https://api.ipify.org/"
-IDDNS_IP=""
 
 # Import values from configuration file if provided
 if [[ -f ${opt_config} ]]; then
@@ -93,6 +107,14 @@ fi
 
 if [[ ${opt_grabber} ]]; then
     IDDNS_GRABBER=${opt_grabber}
+fi
+
+if [[ ${opt_timestamps} ]]; then
+    IDDNS_TIMESTAMPS=${opt_timestamps}
+fi
+
+if [[ ${opt_silent} ]]; then
+    IDDNS_SILENT=${opt_silent}
 fi
 
 # If any required arguments is missing, show usage

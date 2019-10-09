@@ -28,6 +28,12 @@ function usage()
     echo ""
 }
 
+# Helper function for logging messages with the date and time
+function log()
+{
+    echo "$(date -u) : $1"
+}
+
 # Grab arguments from command line
 while getopts ":c:u:p:i:g:" opt
 do
@@ -98,21 +104,21 @@ fi
 # If no IP was specified, try to grab one automatically
 if [[ ${IDDNS_IP} = "" ]]; then
 
-    echo "Grabbing your current public IP from ${IDDNS_GRABBER}"
+    log "Grabbing your current public IP from ${IDDNS_GRABBER}"
 
     IDDNS_IP=$(curl --silent "${IDDNS_GRABBER}")
 
     # If CURL fails to grab the IP for some reason, exit
     if [[ -z $? ]]; then
-        echo "Could not grab your current public IP from ${IDDNS_GRABBER}. Try setting it manually."
+        log "Could not grab your current public IP from ${IDDNS_GRABBER}. Try setting it manually."
         exit 1
     fi
 
-    echo "Your public IP address is ${IDDNS_IP}"
+    log "Your public IP address is ${IDDNS_IP}"
 fi
 
 # Try to update the record
-echo "Trying to make ${IDDNS_HOSTNAME} point to ${IDDNS_IP}"
+log "Trying to make ${IDDNS_HOSTNAME} point to ${IDDNS_IP}"
 OUTPUT=$(curl --silent --user "${IDDNS_USERNAME}:${IDDNS_PASSWORD}" \
 "https://infomaniak.com/nic/update?hostname=${IDDNS_HOSTNAME}&myip=${IDDNS_IP}")
 
@@ -120,46 +126,46 @@ OUTPUT=$(curl --silent --user "${IDDNS_USERNAME}:${IDDNS_PASSWORD}" \
 case ${OUTPUT} in
     "good ${IDDNS_IP}")
         # Everything went according to plan
-        echo "${IDDNS_HOSTNAME} now points to ${IDDNS_IP}"
+        log "${IDDNS_HOSTNAME} now points to ${IDDNS_IP}"
         exit 0
         ;;
     "nochg ${IDDNS_IP}")
         # The record was already set to this IP
-        echo "${IDDNS_HOSTNAME} already points to ${IDDNS_IP}"
+        log "${IDDNS_HOSTNAME} already points to ${IDDNS_IP}"
         exit 0
         ;;
     "nohost")
         # The hostname does not exist or has not been set as dynamic
-        echo "${IDDNS_HOSTNAME} is invalid or has not been set as dynamic"
+        log "${IDDNS_HOSTNAME} is invalid or has not been set as dynamic"
         exit 1
         ;;
     "notfqdn")
         # The hostname is invalid
-        echo "${IDDNS_HOSTNAME} is not a valid FQDN"
+        log "${IDDNS_HOSTNAME} is not a valid FQDN"
         exit 1
         ;;
     "badauth")
         # Invalid credentials
-        echo "The provided credentials are invalid"
+        log "The provided credentials are invalid"
         exit 1
         ;;
     "conflict A")
         # IPv4 conflict
-        echo "Cannot add an A record because an AAAA record already exists for ${IDDNS_HOSTNAME}"
+        log "Cannot add an A record because an AAAA record already exists for ${IDDNS_HOSTNAME}"
         exit 1
         ;;
     "conflict AAAA")
         # IPv6 conflict
-        echo "Cannot add an AAAA record because an A record already exists for ${IDDNS_HOSTNAME}"
+        log "Cannot add an AAAA record because an A record already exists for ${IDDNS_HOSTNAME}"
         exit 1
         ;;
     "The Target field's structure for a A-type entry is incorrect.")
         # IP address invalid
-        echo "The provided IP address is invalid"
+        log "The provided IP address is invalid"
         exit 1
         ;;
     *)
-        echo "${OUTPUT}"
+        log "${OUTPUT}"
         exit 1;
         ;;
 esac

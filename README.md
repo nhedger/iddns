@@ -1,5 +1,7 @@
 # Infomaniak Dynamic DNS Client
 
+`iddns` is an easy-to-use dynamic DNS updater for the *Infomaniak Dynamic DNS* service written in bash.
+
 ## Install
 
 Make sure `curl` is available and installed on your system.

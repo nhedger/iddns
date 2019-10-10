@@ -33,6 +33,7 @@ iddns [options] HOSTNAME
 |`-p`|Password|Dynamic DNS password, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
 |`-i`|IPv4 or IPv6|The IP address to update the Dynamic DNS record with|
 |`-g`|URL|Custom API endpoint that returns only your public IP address as text-only|
+|`-v`|None, it's a flag|Displays the version|
 |`HOSTNAME`|Valid FQDN|The hostname for which the record must be updated|
 
 ### Using a configuration file

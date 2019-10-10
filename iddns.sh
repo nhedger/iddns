@@ -84,10 +84,13 @@ do
 done
 shift $((OPTIND - 1))
 
-# Grab the hostname from the arguments list
-IDDNS_HOSTNAME=$1
+# Source default config if it exists
+if [[ -f ${HOME}/.iddns ]]; then
+    source ${HOME}/.iddns
+fi
 
 # Import values from configuration file if provided
+# This will override configuration defined in the default config
 if [[ -f ${opt_config} ]]; then
     source ${opt_config}
 fi
@@ -117,8 +120,11 @@ if [[ ${opt_silent} ]]; then
     IDDNS_SILENT=${opt_silent}
 fi
 
+# Grab the hostname from the arguments list
+IDDNS_HOSTNAME=$1
+
 # If any required arguments is missing, show usage
-if [ "${IDDNS_USERNAME}" = "" ] || [ "${IDDNS_PASSWORD}" = "" ] || [ "${IDDNS_HOSTNAME}" = "" ]; then
+if [[ "${IDDNS_USERNAME}" = "" ]] || [[ "${IDDNS_PASSWORD}" = "" ]] || [[ "${IDDNS_HOSTNAME}" = "" ]]; then
     usage
     exit 0
 fi

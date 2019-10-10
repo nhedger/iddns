@@ -43,6 +43,8 @@ On such occasions you may pass the `-c` parameter followed by the path to your c
 $ iddns -c /path/to/config/file example.tld
 ```
 
+`iddns` will also try to load automatically a default configuration file named `$HOME/.iddns` if it exists and no alternative configuration file was passed on the command line.
+
 All the options above except the `HOSTNAME` can be set from the configuration file.
 
 **WARNING** : These options will be overridden by their equivalents if they are provided as arguments on the command line.

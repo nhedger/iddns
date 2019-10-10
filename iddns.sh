@@ -85,13 +85,15 @@ done
 shift $((OPTIND - 1))
 
 # Source default config if it exists
-if [[ -f ${HOME}/.iddns ]]; then
+if [[ -f ${HOME}/.iddns ]] && [[ ! -f ${opt_config} ]]; then
+    log "Loading configuration from ${HOME}/.iddns"
     source ${HOME}/.iddns
 fi
 
 # Import values from configuration file if provided
 # This will override configuration defined in the default config
 if [[ -f ${opt_config} ]]; then
+    log "Loading configuration from ${opt_config}"
     source ${opt_config}
 fi
 

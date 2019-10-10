@@ -22,16 +22,16 @@ Run `make uninstall` from the same directory if you want to completely remove `i
 iddns [-st] [-c <config>] [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME
 ```
 
-| Option | Short| Description|
+| Param| Expected value |Description|
 |---|---|---|
-|n/a|`-c`|Path to your configuration file|
-|`IDDNS_USERNAME`|`-u`|The Dynamic DNS username, as configured in your Infomaniak Manager.|
-|`IDDNS_PASSWORD`|`-p`|The Dynamic DNS password, as configured in your Infomaniak Manager. |
-|`IDDNS_IP`|`-i`|The IP address to update the Dynamic DNS record with. This may be either an IPv4 or an IPv6. **Leave empty if you want this IP address to be grabbed automatically.** |
-|`IDDNS_GRABBER`|`-g`|The URL of a custom API endpoint that returns you public IP address. This endpoint must return a text-only response containing only your IP address. **Leave empty to use the default endpoint :** `https://api.ipify.org/`|
-|`IDDNS_TIMESTAMPS`|`-t`|All output is prefixed with the current timestamp. This is particularly useful when outputting to a log file.
-|`IDDNS_SILENT`|`-s`|No output will be generated if this flag is active.|
-|`HOSTNAME`| n/a |The hostname for which the record must be updated. **This must be a valid FQDN and the dynamic record must already exist in your Infomaniak Manager.**|
+|`-s`|None, it's a flag|Silences all output|
+|`-t`|None, it's a flag|Prefixes all output with a timestamp. Useful when logging|
+|`-c`|Path to configuration file|Custom configuration file. See below for more information
+|`-u`|Username|Dynamic DNS username, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
+|`-p`|Password|Dynamic DNS password, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
+|`-i`|IPv4 or IPv6|The IP address to update the Dynamic DNS record with|
+|`-g`|URL|Custom API endpoint that returns only your public IP address as text-only|
+|`HOSTNAME`|Valid FQDN|The hostname for which the record must be updated|
 
 ### Using a configuration file
 
@@ -44,9 +44,17 @@ $ iddns -c /path/to/config/file example.tld
 
 `iddns` will also try to load automatically a default configuration file named `$HOME/.iddns` if it exists and no alternative configuration file was passed on the command line.
 
-All the options above except the `HOSTNAME` can be set from the configuration file.
+#### Valid configuration options
+| Option | Expected value | Description |
+|---|---|---|
+|`IDDNS_SILENT`|`true`/`false`|Silences all output|
+|`IDDNS_TIMESTAMPS`|`true`/`false`|Prefixes all output with a timestamp. Useful when logging|
+|`IDDNS_USERNAME`|Username|Dynamic DNS username, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
+|`IDDNS_PASSWORD`|Username|Dynamic DNS password, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
+|`IDDNS_IP`|IPv4 or IPv6|The IP address to update the Dynamic DNS record with|
+|`IDDNS_GRABBER`|URL|Custom API endpoint that returns only your public IP address as text-only|
 
-**WARNING** : These options will be overridden by their equivalents if they are provided as arguments on the command line.
+**WARNING** : Options declared on the command line have a higher priority so they will override any of these values when set.
 
 You'll find a [example configuration file](config.example) in this repository.
 

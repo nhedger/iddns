@@ -19,8 +19,7 @@ Run `make uninstall` from the same directory if you want to completely remove `i
 
 ## Usage
 ```shell script
-iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME
-iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME
+iddns [-st] [-c <config>] [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME
 ```
 
 | Option | Short| Description|

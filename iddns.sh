@@ -27,8 +27,7 @@ function usage()
 		echo ""
 	  fi
 
-    echo "Usage: iddns -u <username> -p <password> [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME"
-    echo "Usage: iddns -c <config> [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] [-t] [-s] HOSTNAME"
+    echo "Usage: iddns [-st] [-c <config>] [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME"
     echo ""
     echo "Notes:"
     echo ""

@@ -8,6 +8,8 @@
 # License: MIT
 #
 
+VERSION="1.0.0"
+
 # Set default values
 IDDNS_USERNAME=""
 IDDNS_PASSWORD=""
@@ -18,8 +20,13 @@ IDDNS_SILENT=false
 
 function usage()
 {
+    echo " ___ ____  ____  _   _ ____"
+    echo "|_ _|  _ \|  _ \| \ | / ___|"
+    echo " | || | | | | | |  \| \___ \ "
+    echo " | || |_| | |_| | |\  |___) |"
+    echo "|___|____/|____/|_| \_|____/"
     echo ""
-    echo "[k] Infomaniak Dynamic DNS Client"
+    echo "Infomaniak Dynamic DNS Client v${VERSION}"
     echo ""
 
     if [[ ! -z "$1" ]]; then
@@ -27,12 +34,19 @@ function usage()
 		echo ""
 	  fi
 
-    echo "Usage: iddns [-st] [-c <config>] [-u <username>] [-p <password>] [-i <ip>] [-g <grabber>] HOSTNAME"
+    echo "Usage:"
+    echo "  iddns [options] HOSTNAME"
     echo ""
-    echo "Notes:"
-    echo ""
-    echo " * If the remote IP address is not specified, it is automatically obtained through https://www.ipify.org/"
-    echo ""
+    echo "Options:"
+    echo "  -c  Path to a custom configuration file"
+    echo "  -i  IPv4 or IPv6 to assign to the hostname"
+    echo "  -g  URL of and endpoints that returns your public IP address"
+    echo "  -q  Do not output any message"
+    echo "  -t  Prepend all output with the date and time"
+    echo "  -p  Infomaniak Dynamic DNS API password"
+    echo "  -u  Infomaniak Dynamic DNS API username"
+    echo "  -v  Display version"
+
 }
 
 # Helper function for logging messages with the date and time
@@ -48,7 +62,7 @@ function log()
 }
 
 # Grab arguments from command line
-while getopts ":c:u:p:i:g:ts" opt
+while getopts ":c:u:p:i:g:tsv" opt
 do
     case ${opt} in
         c)
@@ -76,12 +90,25 @@ do
         s)
             opt_silent=true
             ;;
+        v)
+            echo "iddns ${VERSION}"
+            exit 0
+            ;;
         \?)
             usage "Invalid argument"
             ;;
     esac
 done
 shift $((OPTIND - 1))
+
+# Grab the hostname from the arguments list
+IDDNS_HOSTNAME=$1
+
+# If any required arguments is missing, show usage
+if [[ "${IDDNS_HOSTNAME}" = "" ]]; then
+    usage
+    exit 0
+fi
 
 # Source default config if it exists
 if [[ -f ${HOME}/.iddns ]] && [[ ! -f ${opt_config} ]]; then
@@ -119,15 +146,6 @@ fi
 
 if [[ ${opt_silent} ]]; then
     IDDNS_SILENT=${opt_silent}
-fi
-
-# Grab the hostname from the arguments list
-IDDNS_HOSTNAME=$1
-
-# If any required arguments is missing, show usage
-if [[ "${IDDNS_USERNAME}" = "" ]] || [[ "${IDDNS_PASSWORD}" = "" ]] || [[ "${IDDNS_HOSTNAME}" = "" ]]; then
-    usage
-    exit 0
 fi
 
 # If no IP was specified, try to grab one automatically

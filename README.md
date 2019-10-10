@@ -1,5 +1,3 @@
-<img src="iddns.svg" width="100%">
-
 # Infomaniak Dynamic DNS Client
 
 `iddns` is an easy-to-use dynamic DNS updater for the *Infomaniak Dynamic DNS* service written in bash.

@@ -51,7 +51,7 @@ $ iddns -c /path/to/config/file example.tld
 |`IDDNS_SILENT`|`true`/`false`|Silences all output|
 |`IDDNS_TIMESTAMPS`|`true`/`false`|Prefixes all output with a timestamp. Useful when logging|
 |`IDDNS_USERNAME`|Username|Dynamic DNS username, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
-|`IDDNS_PASSWORD`|Username|Dynamic DNS password, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
+|`IDDNS_PASSWORD`|Password|Dynamic DNS password, as configured in your [Infomaniak Manager](https://manager.infomaniak.com)|
 |`IDDNS_IP`|IPv4 or IPv6|The IP address to update the Dynamic DNS record with|
 |`IDDNS_GRABBER`|URL|Custom API endpoint that returns only your public IP address as text-only|
 

@@ -1,4 +1,4 @@
-#!/bin/env bash
+#!/usr/bin/env bash
 
 #
 # Infomaniak Dynamic DNS Client

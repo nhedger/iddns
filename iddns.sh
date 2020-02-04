@@ -54,7 +54,7 @@ function log()
 {
     if [[ ${IDDNS_SILENT} = false ]]; then
         if [[ ${IDDNS_TIMESTAMPS} = true ]]; then
-            echo "$(date -u) : $1"
+            echo "$(date "+%d/%m/%y %k:%M") : $1"
         else
             echo $1
         fi

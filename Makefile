@@ -2,7 +2,10 @@ PREFIX?=/usr/local
 
 install:
 	cp iddns.sh $(PREFIX)/bin/iddns
-	cp --backup --suffix=.orig config.example $(HOME)/.iddns
+	if [ -f $(HOME)/.iddns ]; then \
+	    cp $(HOME)/.iddns $(HOME)/.iddns.orig; \
+	fi;
+	cp config.example $(HOME)/.iddns
 	chmod +x $(PREFIX)/bin/iddns
 
 uninstall:

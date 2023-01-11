@@ -1,6 +1,0 @@
-IDDNS_USERNAME=""
-IDDNS_PASSWORD=""
-IDDNS_GRABBER="https://api.ipify.org/"
-IDDNS_IP=""
-IDDNS_TIMESTAMPS=false
-IDDNS_SILENT=false

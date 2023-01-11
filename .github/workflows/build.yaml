@@ -1,0 +1,16 @@
+on: [push]
+
+name: build
+
+jobs:
+  build:
+    name: Build IDDNS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v.
+      - name: Install latest nightly
+        uses: actions-rs/toolchain@v1
+        with:
+            toolchain: stable
+      - name: Run cargo build
+        run: cargo build --release --all-features

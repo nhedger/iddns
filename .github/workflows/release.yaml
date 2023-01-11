@@ -17,8 +17,8 @@ jobs:
       release_created: ${{ steps.release-please.release_created }}
 
   build-release:
-    needs: release-please
-    if: ${{ needs.release-please.outputs.release_created }}
+    needs: release
+    if: ${{ needs.release.outputs.release_created }}
     name: release ${{ matrix.target }}
     runs-on: ubuntu-latest
     strategy:

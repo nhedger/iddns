@@ -5,7 +5,7 @@ on:
 
 name: release-please
 jobs:
-  release-please:
+  release:
     runs-on: ubuntu-latest
     steps:
       - id: release-please
@@ -13,8 +13,12 @@ jobs:
         with:
           release-type: rust
           package-name: iddns
+    outputs:
+      release_created: ${{ steps.release-please.release_created }}
 
   build-release:
+    needs: release-please
+    if: ${{ needs.release-please.outputs.release_created }}
     name: release ${{ matrix.target }}
     runs-on: ubuntu-latest
     strategy:

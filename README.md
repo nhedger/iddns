@@ -7,10 +7,10 @@
 Make sure `curl` is available and installed on your system. `make` is also required if you want to use the Makefile for installing
 the script automatically.
 
-Either clone or [download](https://github.com/nhedger/iddns/archive/master.zip) this repository.
+Either clone or [download](https://github.com/nhedger/iddns/archive/legacy.zip) this repository.
 
 ```shell script
-$ git clone https://github.com/nhedger/iddns
+$ git clone -b legacy https://github.com/nhedger/iddns
 cd iddns
 make install
 ```
@@ -36,7 +36,7 @@ iddns [options] HOSTNAME
 
 ### Using a configuration file
 
-Sometimes, using a configuration file instead of exposing all your options on the command line is preferable. 
+Sometimes, using a configuration file instead of exposing all your options on the command line is preferable.
 On such occasions you may pass the `-c` parameter followed by the path to your configuration file.
 
 ```shell script
@@ -70,13 +70,13 @@ IDDNS_USERNAME="example"
 IDDNS_PASSWORD="password"
 ```
 
-Create a `/etc/cron.d/iddns` file with the following contents (replace with the path to your config file and hostname) : 
+Create a `/etc/cron.d/iddns` file with the following contents (replace with the path to your config file and hostname) :
 
 ```shell script
 0 * * * * root /usr/local/bin/iddns -t -c /path/to/config example.tld >> /var/log/iddns.log 2>&1
 ```
 
-This will run `iddns` every hour and log its output to `/var/log/iddns.log`. 
+This will run `iddns` every hour and log its output to `/var/log/iddns.log`.
 
 
 ## Credits

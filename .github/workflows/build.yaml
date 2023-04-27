@@ -11,4 +11,4 @@ jobs:
       - name: Install toolchain
         uses: dtolnay/rust-toolchain@stable
       - name: Run cargo build
-        run: cargo build --release.yaml --all-features
+        run: cargo build --release --all-features
